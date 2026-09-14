@@ -40,10 +40,10 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: artifact-data
-          path: '**/target/*.jar'
+          path: 'target/*.jar'
   deploy:
     needs: build
-    name: tking artifacts of maven
+    name: taking artifacts of maven
     runs-on: ubuntu-latest
     steps:
       - name: get artifacts from build job
