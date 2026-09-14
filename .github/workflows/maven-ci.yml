@@ -1,0 +1,36 @@
+---
+name: maven test and build
+on:
+  push:
+    branches: ['main']
+  pull_request:
+    branches: ['main']
+jobs:
+  test:
+    name: run mvn test
+    runs-on: ubuntu-latest
+    steps:
+    - name: get sourcecode
+      uses: actions/checkout@v6
+    - name: get java
+      uses: actions/checkout@v5
+      with:
+        distribution: 'temurin'
+        version: '17'
+    - name: running tests
+      run: mvn test
+
+  build:
+    name: building mvn
+    runs-on: ubuntu-latest
+    steps:
+      - name: getting sourcecode
+        uses: actions/checkout@v6
+      - name: java setup
+        uses: actions/checkout@v5
+        with:
+          distribution: 'temurin'
+          version: '17'
+      - name: generating jar
+        run: mvn clean package
+
