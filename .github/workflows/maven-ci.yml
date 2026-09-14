@@ -19,7 +19,13 @@ jobs:
         version: '17'
     - name: running tests
       run: mvn test
-
+    - name: Cache local Maven repository
+      uses: actions/cache@v6
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-
   build:
     needs: test
     name: building mvn
