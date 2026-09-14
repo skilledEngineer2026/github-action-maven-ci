@@ -9,8 +9,6 @@ jobs:
   test:
     name: run mvn test
     runs-on: ubuntu-latest
-    outputs:
-      artifact-data: $ {{ steps.artifact-name.outputs.artifact-data }}
     steps:
     - name: get sourcecode
       uses: actions/checkout@v6
@@ -26,6 +24,8 @@ jobs:
     needs: test
     name: building mvn
     runs-on: ubuntu-latest
+    outputs:
+      artifact-data: ${{ steps.artifact-name.outputs.artifact-data }}
     steps:
       - name: getting sourcecode
         uses: actions/checkout@v6
@@ -57,7 +57,7 @@ jobs:
       - name: list my artifact
         run: ls
       - name: getting artifact file name
-        run: echo $ {{ needs.build.outputs.artifact-data }}
+        run: echo "${{ needs.build.outputs.artifact-data }}"
       
 
 
