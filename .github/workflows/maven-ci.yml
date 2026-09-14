@@ -10,7 +10,7 @@ jobs:
     name: run mvn test
     runs-on: ubuntu-latest
     outputs:
-      artifact-data:
+      artifact-data: $ {{ steps.artifact-name.outputs.artifact-data }}
     steps:
     - name: get sourcecode
       uses: actions/checkout@v6
@@ -52,6 +52,9 @@ jobs:
           name: artifact-data
       - name: list my artifact
         run: ls
+      - name: Get name of the output file
+        id: artifact-name
+        run: find target/*.jar -type f -execdir echo 'artifact-data={}' >> $GITHUB_OUTPUT ';'
 
 
 
