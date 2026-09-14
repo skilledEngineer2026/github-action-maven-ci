@@ -9,6 +9,8 @@ jobs:
   test:
     name: run mvn test
     runs-on: ubuntu-latest
+    outputs:
+      artifact-data:
     steps:
     - name: get sourcecode
       uses: actions/checkout@v6
