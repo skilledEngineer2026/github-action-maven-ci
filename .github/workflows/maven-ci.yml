@@ -39,4 +39,17 @@ jobs:
         with:
           name: arttifact-data
           path: '**/target/*.jar'
+  deploy:
+    needs: build
+    name: tking artifacts of maven
+    runs-on: ubuntu-latest
+    steps:
+      - name: get artifacts from build job
+        uses: actions/download-artifact@v8
+        with:
+          name: artifact-data
+      - name: list my artifact
+        run: ls
+
+
 
